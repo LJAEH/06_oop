@@ -116,6 +116,8 @@ public class ClsService {
 		System.out.println(u3.getUserName());
 		System.out.println(u3.getUserAge());
 		System.out.println(u3.getUserGender());
+		// 여기서 u3 : 지역변수  
+		
 		
 	}
 }
