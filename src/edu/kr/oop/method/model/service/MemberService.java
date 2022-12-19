@@ -73,9 +73,23 @@ public class MemberService { // 클래스
 			switch(menuNum) {
 			case 1 : System.out.println( signup() ); break;
 			case 2 : System.out.println( login() ); break;
-			case 3 : break;
-			case 4 : break;
-			case 0 : break;
+			case 3 : System.out.println( selectMember() );break;
+			case 4 : 
+				// 회원 정보 수정 메서드 수행후
+				// 반환되는 결과를 result 변수에 저장
+				int result = updateMember(); // -1 or 0 or 1
+				
+				if (result == 1) {
+					System.out.println("로그인해주세요");
+				} else if (result == 0) {
+					System.out.println("회원정보수정실패(비밀번호불일치)");
+				} else {
+					System.out.println("회원정보가수정되었습니다");
+				}
+				
+				break;
+			case 0 : System.out.println("프로그램 종료합니다");
+				break;
 			default : System.out.println("잘못된 입력입니다. 다시입력");
 			}
 			
@@ -122,8 +136,8 @@ public class MemberService { // 클래스
 		// ** memberInfo가 객체를 참조하고 있는지 확인
 		if( memberInfo == null ) { // 회원가입을 먼저 안한 경우
 			return "회원 가입을 진행해주세요";
-			
 		}
+		
 		System.out.print("아이디 입력 : ");
 		String memberId = sc.next();
 		System.out.print("비밀번호 입력 : ");
@@ -140,6 +154,74 @@ public class MemberService { // 클래스
 	}
 	
 	// 회원 정보 조회 기능
+	// 아이디, 이름, 나이 까지만 조회
+	
+	// CRUD ( C:Create, R:Read, U:Update, D:Delete )
+	
+	public String selectMember() {
+		System.out.println("회원 조회 정보");
+		
+		//손코딩해보기
+		// 1) 로그인 여부 확인 => 필드 loginMember가 참조하는 객체가 있는지 확인
+
+		if(loginMember == null) {
+			return "로그인 해주세요";
+		} else {
+		// 2) 로그인이 되어있는 경우
+		//    회원정보를 출력할 문자열을 만들어서 반환(return)
+		//    단, 비밀번호는 제외
+		
+		String str = "이름 : " + loginMember.getMemberName();
+		str += "\n아이디 : " + loginMember.getMemberId();
+		str += "\n나이 : " + loginMember.getMemberAge();
+		
+		return str;
+		
+		}
+		
+	}
+	
 	// 회원 정보 수정(update) 기능
+	
+	public int updateMember() {
+		System.out.println("\n회원 정보 수정");
+		
+		// 1) 로그인 여부 판별
+		//    로그인이 되어있지 않으면 -1변환
+		if (loginMember == null) {
+			return -1;
+		}
+		// 2) 수정할 회원 정보 입력 받기(이름, 나이)
+			System.out.print("수정할 이름 입력 : ");
+			String inputName = sc.next();
+			
+			System.out.print("수정할 나이 입력 : ");
+			int inputAge = sc.nextInt();
+			
+			sc.nextLine();
+			// 입력버퍼 초기화
+		
+		
+		// 3) 비밀번호 입력받아서
+		//	  로그인한 회원의 비밀번호와 일치하는지 확인
+			
+			System.out.print("비밀번호 입력 : ");
+			String inputPw = sc.next();
+			
+			if( inputPw.equals(loginMember.getMemberPw())) {
+				
+				loginMember.setMemberName(inputPw);
+				// 입력받은 inputName을
+				// loginMember가 참조하는 Member객체의 필드 member
+				loginMember.setMemberAge(inputAge);
+				
+				return 1;
+			}
+		// 4) 비밀번호 같은 경우
+		//	  로그인한 회원의 이름, 나이 정보를 입력받은 값으로 변경후
+		//	  1 반환
+		
+		// 5) 비밀번호가 다른경우 0 반환
+	}
 	
 }

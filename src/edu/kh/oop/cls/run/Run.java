@@ -9,7 +9,7 @@ public class Run {
 
 		ClsService ex = new ClsService();
 		
-		ex.ex3();
+		ex.ex1();
 	}
 
 }

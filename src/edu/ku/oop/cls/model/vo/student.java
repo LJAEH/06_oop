@@ -12,11 +12,11 @@ public class student { // 클래스 선언부
 	
 	// 필드 구성
 	/*
-		[접근제한자]   [예약어]     자료형     변수명 [=초기값]; // 대괄호내용은 선택사항
-	+     public     final     기본자료형 	
-	#   protected    static      배열
-	~   (default) final static 클래스명
-	-     private static final (참조형)
+		[접근제한자]   [예약어]       자료형     변수명 [=초기값]; // 대괄호내용은 선택사항
+	+     public     final      기본자료형 	
+	#   protected    static       배열
+	~   (default) final static  클래스명
+	-    private  static final  (참조형)
 
 
 	 */
